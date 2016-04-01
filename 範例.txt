@@ -1,0 +1,158 @@
+#####小技巧
+
+#1.Tab兩功能: 智慧查詢、排版
+#2.Alt-P:前一個命令
+#3.Alt-N:下一個命令
+
+
+
+#####簡單宣告(python並不會預設型態 不用事先宣告)
+
+#隨便宣告
+#他會自動判斷是否可以加減乘除
+#EX1 ab全部都數字
+a=1
+b=2
+print(a)
+print(b)
+print(a+b)
+print(str(a)+str(b))
+#EX2 a數字 b字串   除非轉型   無法相加
+
+a=1
+b="hello"
+print(a)
+print(b)
+print(a+b)
+print(str(a)+b)
+
+
+#陣列
+word=["dog", "spider"]
+print(word) 
+print("word[0]:"+word[0]) 
+print("回傳資料長度:" + str(len(word)))
+print("新增:cat")
+word.append("cat")
+print(word) 
+
+word.pop()
+print("pop() 後進先出:")
+print(word)
+
+print("增加多個bird, bear:")
+word.extend(["bird", "bear"])
+print(word) 
+print("指定remove:bear") 
+word.remove("bear")
+print(word)
+
+print("指定位置insert") 
+word.insert(0, "bear")
+print("insert") 
+print(word) 
+
+#迴圈  word相當於java的條件長度
+for i in word:
+    print("word:"+i)
+
+
+#####簡單印資料寫檔
+
+#印在螢幕   
+#https://docs.python.org/2/library/stdtypes.html#string-formatting-operations
+
+# This prints out "John is 23 years old."    可以做簡單的組合
+name = "John"
+age = 23
+print ("%s is %d years old." % (name, age))
+
+#寫檔   用上面的例子
+
+word=["dog", "spider"]
+print(word) 
+print("word[0]:"+word[0]) 
+print("回傳資料長度:" + str(len(word)))
+print("新增:cat")
+word.append("cat")
+print(word) 
+
+word.pop()
+print("pop() 後進先出:")
+print(word)
+
+print("增加多個bird, bear:")
+word.extend(["bird", "bear"])
+print(word) 
+print("指定remove:bear") 
+word.remove("bear")
+print(word)
+
+print("指定位置insert") 
+word.insert(0, "bear")
+print("insert") 
+print(word) 
+
+for i in word:
+    #寫檔自己取個名子fout 
+    fout = open ( "test.txt", "w") #a    #要講w和a的差別
+    fout.writelines('%s ' % i)
+    fout.writelines('\n')
+    print(i)
+
+
+fout.close()
+
+
+#讀檔
+#f.readline() - 讀取一行,最後面會加上一個 \n
+f = open('test.txt','r')  
+print(f.read())
+
+
+
+
+
+
+
+
+#####要先宣告method才能呼叫
+#EX1  失敗例子
+number = 2
+print ("out of methodforGlobal 1st time=", number)
+methodforGlobal()
+print ("out of methodforGlobal 2st time=", number)
+
+
+def methodforGlobal():
+    global number
+    number = 1
+    print ("methodforGlobal:", number)
+
+#EX2  成功例子
+
+
+def methodforGlobal():
+    global number
+    number = 1
+    print ("methodforGlobal:", number)
+    
+number = 2
+print ("out of methodforGlobal 1st time=", number)
+methodforGlobal()
+print ("out of methodforGlobal 2st time=", number)
+
+#global相當於全域變數 會覆寫
+
+#EX1  例子(以java來說最後的結果應該還是2，但是這裡結果會是1)
+
+
+def methodforGlobal():
+    global number
+    number = 1
+    print ("methodforGlobal:", number)
+    
+number = 2
+print ("out of methodforGlobal 1st time=", number)
+methodforGlobal()
+print ("out of methodforGlobal 2st time=", number)

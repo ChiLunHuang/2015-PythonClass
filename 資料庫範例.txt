@@ -1,0 +1,141 @@
+#查詢
+
+import pypyodbc as pyodbc
+#C:\Python34\>python.exe -m pip install pypyodbc
+
+
+
+conn = pyodbc.connect('DRIVER={SQL Server};SERVER=yourip;DATABASE=Software;UID=test;PWD=123')
+cursor = conn.cursor()
+print("----------連結資料庫成功----------")
+
+cursor.execute("select * from StudentInfo")
+rows = cursor.fetchall()
+print("----------查詢結果----------")
+for row in rows:
+    print (row)
+
+
+
+conn.close()
+###########################################################
+
+
+#新增
+
+import pypyodbc as pyodbc
+#C:\Python34\>python.exe -m pip install pypyodbc
+
+
+
+conn = pyodbc.connect('DRIVER={SQL Server};SERVER=yourip;DATABASE=Software;UID=test;PWD=123')
+cursor = conn.cursor()
+print("----------連結資料庫成功----------")
+
+
+print("----------原本資料----------")
+cursor.execute("select * from StudentInfo")
+rows = cursor.fetchall()
+for row in rows:
+    print (row)
+
+
+cursor.execute("insert into StudentInfo(SID, name,sex,height,weight) values ('99156222', '修瑋', '變性', '180','55')")
+conn.commit()
+
+#Note the calls to conn.commit().
+#You must call commit or your changes will be lost!
+#When the connection is closed, any pending changes will be rolled back.
+#This makes error recovery very easy, but you must remember to call commit.
+print("----------新增資料後結果----------")
+cursor.execute("select * from StudentInfo")
+rows = cursor.fetchall()
+for row in rows:
+    print (row)
+
+
+conn.close()
+
+###########################################################
+
+#修改
+
+import pypyodbc as pyodbc
+#C:\Python34\>python.exe -m pip install pypyodbc
+
+
+
+conn = pyodbc.connect('DRIVER={SQL Server};SERVER=yourip;DATABASE=Software;UID=test;PWD=123')
+cursor = conn.cursor()
+print("----------連結資料庫成功----------")
+
+
+print("----------原本資料----------")
+cursor.execute("select * from StudentInfo where SID='%s' " %(99156222))
+rows = cursor.fetchall()
+for row in rows:
+    print (row)
+
+cursor.execute ("UPDATE StudentInfo SET height=%s, weight=%s WHERE SID='%s' " % (100, 80,99156222))
+conn.commit()
+
+
+print("----------修改資料後結果----------")
+cursor.execute("select * from StudentInfo")
+rows = cursor.fetchall()
+for row in rows:
+    print (row)
+
+
+conn.close()
+
+###########################################################
+
+
+#刪除
+
+import pypyodbc as pyodbc
+#C:\Python34\>python.exe -m pip install pypyodbc
+
+
+
+conn = pyodbc.connect('DRIVER={SQL Server};SERVER=yourip;DATABASE=Software;UID=test;PWD=123')
+cursor = conn.cursor()
+print("----------連結資料庫成功----------")
+
+
+print("----------原本資料----------")
+cursor.execute("select * from StudentInfo ")
+rows = cursor.fetchall()
+for row in rows:
+    print (row)
+
+cursor.execute ("DELETE StudentInfo  WHERE SID='%s' " % (99156222))
+conn.commit()
+
+
+print("----------修改資料後結果----------")
+cursor.execute("select * from StudentInfo")
+rows = cursor.fetchall()
+for row in rows:
+    print (row)
+
+
+conn.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
